@@ -1,39 +1,44 @@
 Clockwork-cli
 =============
 
+Command-line interface for Clockwork. Useful for visualizing clockwork logs for apps with no frontend (like APIs).
+
+This is a fork of [Petr Trofimov's repository](https://github.com/ptrofimov/clockwork-cli), modified to work with Laravel 5.
+
 **[Clockwork](http://github.com/itsgoingd/clockwork)** - is a tool for debugging and profiling PHP applications.
 
 **[Clockwork-chrome](http://github.com/itsgoingd/clockwork-chrome)** - is a Chrome extension for Clockwork.
 
 **[Clockwork-firebug](https://github.com/sidorovich/clockwork-firebug)** - it's Clockwork extension for Firebug.
 
-**This project** is a command-line interface for Clockwork.
 
 ## Installation
 
-* Install clockwork-cli via composer for your project:
+* Add the repo to your composer.json:
 ```
-composer require ptrofimov/clockwork-cli:*
+{
+    "type": "vcs",
+    "url": "https://github.com/lawnstarter/clockwork-cli"
+}
 ```
-* Or install clockwork-cli globally:
+
+Install clockwork-cli via composer for your project:
 ```
-composer global require ptrofimov/clockwork-cli:*
+composer require lawnstarter/clockwork-cli:*
 ```
-* You could also register Artisan command
+
+* Register the artisan command in app\Console\Kernel.php:
 ```
-Artisan::add(new Clockwork\Cli\Laravel\Command);
+\Clockwork\Cli\Laravel\Command::class,
 ```
 
 ## Usage
 
 * Run script to monitor clockwork logs for current project:
 ```
-./bin/clockwork-cli
+php artisan clockwork:log
 ```
-* Or you can monitor logs for many projects:
-```
-./bin/clockwork-cli /www/*
-```
+
 * You will see updating list of HTTP requests. The first character is a hotkey.
 * Press the hotkey to view details of HTTP request.
 * Press Backspace to show requests for last 10 minutes
